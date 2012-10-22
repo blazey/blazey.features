@@ -9,5 +9,5 @@ TestResults
 _ReSharper*
 
 blazey.features.sln.*
-blazey.features.suo
+*.suo
 blazey.features.dotsettings
