@@ -110,24 +110,24 @@ namespace blazey.features.specs
 
             var featureSpecification = (IFeatureSpecification<object>) _kernel.Resolve(featurespecificationType);
 
-            return featureSpecification.On() ? _kernel.Resolve(dependency.TargetItemType) : featureSpecification.Off();
+            return featureSpecification.Default() ? _kernel.Resolve(dependency.TargetItemType) : featureSpecification.Feature();
         }
     }
 
     internal interface IFeatureSpecification<out TFeature> where TFeature : class
     {
-        bool On();
-        TFeature Off();
+        bool Default();
+        TFeature Feature();
     }
 
     internal class FeatureSpecification : IFeatureSpecification<IFeature>
     {
-        public bool On()
+        public bool Default()
         {
             return false;
         }
 
-        public IFeature Off()
+        public IFeature Feature()
         {
             return new UnreleasedFeature();
         }
