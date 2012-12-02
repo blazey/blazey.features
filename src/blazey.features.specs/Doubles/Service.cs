@@ -1,4 +1,4 @@
-namespace blazey.features.specs
+namespace blazey.features.specs.Doubles
 {
     public class Service
     {

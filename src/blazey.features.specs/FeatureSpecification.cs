@@ -1,3 +1,5 @@
+using blazey.features.specs.Doubles;
+
 namespace blazey.features.specs
 {
     internal class FeatureSpecification : IFeatureSpecification<IFeature>
