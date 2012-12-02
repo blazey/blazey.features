@@ -2,7 +2,7 @@ using Castle.Core;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Context;
 
-namespace blazey.features.specs
+namespace blazey.features
 {
     public class FeatureResolver : ISubDependencyResolver
     {
