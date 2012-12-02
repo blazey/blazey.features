@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Machine.Specifications;
@@ -20,11 +21,21 @@ namespace blazey.features.specs
         private It should_resolve_as_unreleased = () => _resolvedFeature.ShouldBeOfType<UnreleasedFeature>();
     }
 
+    internal class FeaturesConfiguration
+    {
+        readonly List<Tuple<Type, Type>> _services = new List<Tuple<Type, Type>>();
+
+        internal void AddImplementation<TFeature>(TFeature service, TFeature implementation)
+        {
+            _services.Add(new Tuple<Type, Type>(service.GetType(), implementation.GetType()));
+        }
+    }
+
     internal class Features
     {
         public static IWindsorContainer Container { get; private set; }
 
-        protected Features()
+        protected Features(Action<FeaturesConfiguration> config)
         {
             Container = new WindsorContainer();
         }
