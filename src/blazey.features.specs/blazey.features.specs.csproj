@@ -53,13 +53,12 @@
     <Compile Include="RegistrarResolver.cs" />
     <Compile Include="FeatureResolver.cs" />
     <Compile Include="FeatureSpecification.cs" />
-    <Compile Include="IFeature.cs" />
+    <Compile Include="Doubles\IFeature.cs" />
     <Compile Include="IFeatureSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReleasedFeature.cs" />
-    <Compile Include="re_use_experiment.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="UnreleasedFeature.cs" />
+    <Compile Include="Doubles\ReleasedFeature.cs" />
+    <Compile Include="Doubles\Service.cs" />
+    <Compile Include="Doubles\UnreleasedFeature.cs" />
     <Compile Include="when_component_is_an_unreleased_feature.cs" />
     <Compile Include="when_component_is_a_released_feature.cs" />
     <Compile Include="when_machine_specs_compiles.cs" />
