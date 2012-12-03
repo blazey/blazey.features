@@ -1,6 +1,4 @@
-using blazey.features.specs.Doubles;
-
-namespace blazey.features.specs
+namespace blazey.features.specs.Doubles
 {
     internal class DummyFeatureSpecification : IFeatureSpecification<IFeature>
     {

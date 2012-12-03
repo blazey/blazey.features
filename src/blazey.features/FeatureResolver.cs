@@ -19,7 +19,13 @@ namespace blazey.features
         public bool CanResolve(CreationContext context, ISubDependencyResolver contextHandlerResolver,
                                ComponentModel model, DependencyModel dependency)
         {
+            var featureSpecificationType = FeatureSpecificationType.Make(dependency.TargetItemType);
+
+            var isFeatureRegistered = _kernel.HasComponent(dependency.TargetItemType);
+            var isFeatureSpecifactionRegistered = _kernel.HasComponent(featureSpecificationType);
+
             //TODO: is not null
+            if (null == dependency.TargetItemType) return false;
             //TODO: is IFeatureSpecification<T>?
             //TODO: and T is registered by kernal already
             //TODO: identify if type has corresponding IFeatureSpecification<T>
@@ -41,6 +47,22 @@ namespace blazey.features
             var featureSpecification = (IFeatureSpecification<object>) _kernel.Resolve(featurespecificationType);
 
             return featureSpecification.Default() ? _kernel.Resolve(dependency.TargetItemType) : featureSpecification.Feature();
+        }
+    }
+
+    internal class FeatureSpecificationType
+    {
+
+        internal static Type Make(Type featureSpecifactionType)
+        {
+            return new FeatureSpecificationType(featureSpecifactionType).FeatureSpecifactionType;
+        }
+
+        internal Type FeatureSpecifactionType { get; private set; }
+
+        internal FeatureSpecificationType(Type targetItemType)
+        {
+            FeatureSpecifactionType = typeof (IFeatureSpecification<>).MakeGenericType(targetItemType);
         }
     }
 
