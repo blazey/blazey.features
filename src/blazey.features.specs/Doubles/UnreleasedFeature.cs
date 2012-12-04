@@ -1,6 +1,6 @@
 namespace blazey.features.specs.Doubles
 {
-    internal class UnreleasedFeature : IFeature
+    internal class UnreleasedFeature : ISomeFeature
     {
     }
 }

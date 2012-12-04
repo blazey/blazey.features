@@ -8,19 +8,18 @@ namespace blazey.features.specs
 {
     internal class when_component_has_corresponding_feature_specification
     {
-        private static IFeature _resolvedFeature;
+        private static ISomeFeature _resolvedFeature;
         private static IWindsorContainer _container;
         private static Exception _exception;
 
         private Establish that_windsor_is_configured = () =>
             {
                 _container = new WindsorContainer();
-                _container.AddFacility<FeatureFacility>();
+                _container.AddFacility<FeaturesFacility>();
                 _container.Register(
                     Component.For<Service>(),
-                    Component.For<IFeature>().ImplementedBy<ReleasedFeature>());
+                    Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());
                 
-                FeatureFacility.AddFeatueSpecification<DummyFeatureSpecification, ReleasedFeature>(_container);
 
                };
 

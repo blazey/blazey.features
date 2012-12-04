@@ -1,6 +1,6 @@
 namespace blazey.features.specs.Doubles
 {
-    public interface IFeature
+    public interface ISomeFeature
     {
     }
 }

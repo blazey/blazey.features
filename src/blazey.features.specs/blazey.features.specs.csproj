@@ -50,12 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Doubles\DummyFeatureSpecification.cs" />
-    <Compile Include="Doubles\IFeature.cs" />
+    <Compile Include="doubles\DummyFeatureSpecification.cs" />
+    <Compile Include="doubles\ISomeFeature.cs" />
+    <Compile Include="Features.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Doubles\ReleasedFeature.cs" />
-    <Compile Include="Doubles\Service.cs" />
-    <Compile Include="Doubles\UnreleasedFeature.cs" />
+    <Compile Include="doubles\ReleasedFeature.cs" />
+    <Compile Include="doubles\Service.cs" />
+    <Compile Include="doubles\UnreleasedFeature.cs" />
     <Compile Include="when_component_is_an_unreleased_feature.cs" />
     <Compile Include="when_component_is_a_released_feature.cs" />
     <Compile Include="when_component_has_corresponding_feature_specification.cs" />

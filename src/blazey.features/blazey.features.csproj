@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FeatureFacility.cs" />
+    <Compile Include="configuration\FeaturesConfiguration.cs" />
+    <Compile Include="FeaturesFacility.cs" />
     <Compile Include="FeatureResolver.cs" />
+    <Compile Include="FeatureSpecificationType.cs" />
     <Compile Include="IFeatureSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
