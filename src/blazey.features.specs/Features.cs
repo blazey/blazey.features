@@ -7,33 +7,17 @@ namespace blazey.features.specs
 {
     public class Features
     {
-        public static IWindsorContainer Container { get; private set; }
+        public IWindsorContainer Container { get; private set; }
 
-        public Features()
+        internal Establish ConfigureWindsor(IWindsorContainer container, Action<FeaturesConfiguration> config)
         {
-            Container = new WindsorContainer();
-            Container.AddFacility<FeaturesFacility>();
-        }
-
-        internal Establish ConfigureWindsor(Action<FeaturesConfiguration> config)
-        {
-
-            var c = new FeaturesConfiguration();
-            c.ConfigureWindsor(Container);
-            config(c);
+            if(null == container) throw new ArgumentNullException("container");
+            Container = container;
+            var featuresConfiguration = new FeaturesConfiguration();
+            featuresConfiguration.ConfigureWindsor(Container);
+            config(featuresConfiguration);
 
             return () => { };
-/*
-            return () =>
-                {
-                    Container = new WindsorContainer();
-                    Container.Kernel.Resolver.AddSubResolver(new FeatureResolver(Container.Kernel));
-                    Container.Register(
-                        Component.For<Service>(),
-                        Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
-                        Component.For<IFeatureSpecification<ISomeFeature>>().ImplementedBy<DummyFeatureSpecification>());
-                };
-*/
         }
 
         internal T Resolve<T>()
