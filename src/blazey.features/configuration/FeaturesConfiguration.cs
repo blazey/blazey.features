@@ -9,24 +9,25 @@ namespace blazey.features.configuration
     {
         private readonly IList<KeyValuePair<Type, Type>> _services = new List<KeyValuePair<Type, Type>>();
 
-        public void AddFeatueSpecification<TFeatureSpecifaction, TFeature>()
-            where TFeatureSpecifaction : IFeatureSpecification<TFeature>
+        public void AddFeatueSpecification<TFeatureSpecifactionImplementation, TFeature>()
+            where TFeatureSpecifactionImplementation : IFeatureSpecification<TFeature>
             where TFeature : class
         {
             var featureType = typeof (TFeature);
-            var featureSpecificationType = typeof (IFeatureSpecification<>);
 
-            if (featureType == featureSpecificationType)
+            if (FeatureSpecificationType.IsFeatureSpecification(featureType))
             {
                 throw new InvalidOperationException("Cannot nest feature specications");
             }
+
+            var service = FeatureSpecificationType.FromFeature(featureType).FeatureSpecifactionType;
+            var implementation = typeof (TFeatureSpecifactionImplementation);
             
-            _services.Add(new KeyValuePair<Type, Type>(typeof(TFeatureSpecifaction), typeof (TFeatureSpecifaction)));
+            _services.Add(new KeyValuePair<Type, Type>(service, implementation));
         }
 
         public void ConfigureWindsor(IWindsorContainer container)
         {
-
             container.AddFacility<FeaturesFacility>();
 
             foreach (var service in _services)
