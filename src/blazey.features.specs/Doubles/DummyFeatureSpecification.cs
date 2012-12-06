@@ -1,15 +1,13 @@
-using blazey.features.specs.Doubles;
-
-namespace blazey.features.specs
+namespace blazey.features.specs.Doubles
 {
-    internal class DummyFeatureSpecification : IFeatureSpecification<IFeature>
+    internal class DummyFeatureSpecification : IFeatureSpecification<ISomeFeature>
     {
-        public bool Default()
+        public bool On()
         {
             return false;
         }
 
-        public IFeature Feature()
+        public ISomeFeature Feature()
         {
             return new UnreleasedFeature();
         }

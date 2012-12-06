@@ -1,8 +1,12 @@
 namespace blazey.features
 {
-    public interface IFeatureSpecification<out TFeature> where TFeature : class
+    public interface IFeatureOn
     {
-        bool Default();
+        bool On();
+    }
+
+    public interface IFeatureSpecification<out TFeature> :IFeatureOn where TFeature : class
+    {
         TFeature Feature();
     }
 }
