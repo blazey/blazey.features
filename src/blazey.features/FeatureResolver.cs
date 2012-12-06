@@ -20,8 +20,7 @@ namespace blazey.features
                                ComponentModel model, DependencyModel dependency)
         {
 
-            var f = FeatureSpecificationType.KernelCanResolve(_kernel, dependency);
-            return f;
+            return FeatureSpecificationType.KernelCanResolve(_kernel, dependency);
         }
 
         public object Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver,

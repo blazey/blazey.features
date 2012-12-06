@@ -13,6 +13,13 @@ namespace blazey.features.configuration
             where TFeatureSpecifactionImplementation : IFeatureSpecification<TFeature>
             where TFeature : class
         {
+                        var implementation = typeof (TFeatureSpecifactionImplementation);
+
+            if (implementation.IsAbstract || implementation.IsInterface)
+            {
+                throw new InvalidOperationException("must be a concrete type");
+            }
+
             var featureType = typeof (TFeature);
 
             if (FeatureSpecificationType.IsFeatureSpecification(featureType))
@@ -21,7 +28,6 @@ namespace blazey.features.configuration
             }
 
             var service = FeatureSpecificationType.FromFeature(featureType).FeatureSpecifactionType;
-            var implementation = typeof (TFeatureSpecifactionImplementation);
             
             _services.Add(new KeyValuePair<Type, Type>(service, implementation));
         }
