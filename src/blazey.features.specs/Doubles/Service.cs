@@ -2,7 +2,7 @@ namespace blazey.features.specs.Doubles
 {
     public class Service
     {
-        public ISomeFeature Feature { get; private set; }
+        public object Feature { get; private set; }
 
         public Service(ISomeFeature feature)
         {

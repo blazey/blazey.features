@@ -4,30 +4,31 @@ namespace blazey.features
 {
     internal class FeatureSpecificationType
     {
+        internal static FeatureSpecificationType FromDependency(Type dependency)
+        {
 
-        internal static FeatureSpecificationType FromType(Type featureSpecifactionType)
-        {
-            return new FeatureSpecificationType(featureSpecifactionType);
-        }
-        internal static FeatureSpecificationType FromType<TFeatureSpecifactionType>() where TFeatureSpecifactionType : IFeatureSpecification<object>
-        {
-            return new FeatureSpecificationType(typeof(TFeatureSpecifactionType));
+            return new FeatureSpecificationType(dependency);
         }
 
         internal Type FeatureSpecifactionType { get; private set; }
 
         internal Type Feature { get; private set; }
 
+        public static Type OpenGenericType { get { return typeof (IFeatureSpecification<>); } }
+
+        public static bool IsFeatureSpecification(Type candidate)
+        {
+            return candidate == OpenGenericType;
+        }
+
         protected FeatureSpecificationType(Type targetItemType)
         {
-            var featureSpecifcationType = typeof (IFeatureSpecification<>);
-
-            if(targetItemType == featureSpecifcationType) throw new ArgumentException("targetItemType is not IFeatureSpecification<T>");
             
-            FeatureSpecifactionType = featureSpecifcationType.MakeGenericType(targetItemType);
+            if(targetItemType == OpenGenericType) throw new ArgumentException("targetItemType is not IFeatureSpecification<T>");
+            
+            FeatureSpecifactionType = OpenGenericType.MakeGenericType(targetItemType);
 
             Feature = targetItemType.GetGenericArguments()[0];
         }
-
     }
 }

@@ -11,8 +11,6 @@ namespace blazey.features.specs
         private static ISomeFeature _resolvedFeature;
         private static IWindsorContainer _container;
         private static Exception _exception;
-        private It should_not_throw = () => _exception.ShouldBeNull();
-        private It should_resolve_as_released = () => _resolvedFeature.ShouldBeOfType<ReleasedFeature>();
 
         private Establish that_windsor_is_configured = () =>
             {
@@ -22,5 +20,9 @@ namespace blazey.features.specs
 
         private Because windsor_resolves = () => _exception = Catch.Exception(
             () => _resolvedFeature = _container.Resolve<ISomeFeature>());
+
+        private It should_not_throw = () => _exception.ShouldBeNull();
+        private It should_resolve_as_released = () => _resolvedFeature.ShouldBeOfType<ReleasedFeature>();
+
     }
 }
