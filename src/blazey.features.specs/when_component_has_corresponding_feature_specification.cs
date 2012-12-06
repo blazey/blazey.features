@@ -13,10 +13,10 @@ namespace blazey.features.specs
         private static readonly Features _features = new Features();
 
         public Establish that_windsor_is_configured = _features.ConfigureWindsor(config =>
-            {
-                config.AddFeatueSpecification<IFeatureSpecification<ReleasedFeature>, ISomeFeature>();
-                config.RegisterComponent(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());
-            }); 
+        {
+            config.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>();
+            config.RegisterComponent(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());
+        });
 
         public Because windsor_resolves = () => _exception = Catch.Exception(
             () => _resolvedFeature = _features.ResolveFeature());

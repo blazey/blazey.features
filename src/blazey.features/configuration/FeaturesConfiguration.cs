@@ -13,7 +13,7 @@ namespace blazey.features.configuration
             where TFeatureSpecifactionImplementation : IFeatureSpecification<TFeature>
             where TFeature : class
         {
-                        var implementation = typeof (TFeatureSpecifactionImplementation);
+            var implementation = typeof (TFeatureSpecifactionImplementation);
 
             if (implementation.IsAbstract || implementation.IsInterface)
             {
