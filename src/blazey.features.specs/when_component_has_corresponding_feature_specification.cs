@@ -2,6 +2,7 @@ using System;
 using Castle.MicroKernel.Registration;
 using Machine.Specifications;
 using blazey.features.specs.Doubles;
+using blazey.features.specs.configuration;
 
 namespace blazey.features.specs
 {
@@ -12,7 +13,7 @@ namespace blazey.features.specs
         private static Exception _exception;
         private static readonly Features _features = new Features();
 
-        public Establish that_windsor_is_configured = _features.ConfigureWindsor(config =>
+        public Establish that_component_has_feature_specifcation = _features.ConfigureWindsor(config =>
         {
             config.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>();
             config.RegisterComponent(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());

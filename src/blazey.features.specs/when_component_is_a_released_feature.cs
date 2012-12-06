@@ -6,6 +6,7 @@ using blazey.features.specs.Doubles;
 
 namespace blazey.features.specs
 {
+    [Subject("Standard container behaviour")]
     internal class when_component_is_a_released_feature
     {
         private static ISomeFeature _resolvedFeature;
