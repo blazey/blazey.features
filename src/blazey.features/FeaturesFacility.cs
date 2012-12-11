@@ -24,6 +24,7 @@ namespace blazey.features
             if (null == container) throw new ArgumentNullException("container");
 
             var configInstance = new FeaturesConfiguration();
+            configInstance.AddFeatueSpecification<TFeatureSpecifaction, TFeature>();
             configInstance.ConfigureWindsor(container);
         }
     }

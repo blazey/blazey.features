@@ -13,7 +13,7 @@ namespace blazey.features.specs
         private static Exception _exception;
         private static readonly Features _features = new Features();
 
-        public Establish that_component_has_feature_specifcation = _features.ConfigureWindsor(config =>
+        public Establish that_component_has_feature_specifcation = _features.EstablishWindsor(config =>
         {
             config.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>();
             config.RegisterComponent(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());

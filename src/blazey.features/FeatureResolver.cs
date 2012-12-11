@@ -33,13 +33,13 @@ namespace blazey.features
              */
 
             var featurespecificationType = FeatureSpecificationType
-                .FromFeature(dependency.TargetItemType)
-                .FeatureSpecifactionType;
+                .FromFeature(dependency.TargetItemType);
 
             var featureSpecification = (IFeatureSpecification<object>) _kernel.Resolve(featurespecificationType);
 
-            if (featureSpecification.On()) return _kernel.Resolve(dependency.TargetItemType);
-            else return featureSpecification.Feature();
+            return featureSpecification.On()
+                       ? _kernel.Resolve(dependency.TargetItemType)
+                       : featureSpecification.Feature();
         }
     }
 

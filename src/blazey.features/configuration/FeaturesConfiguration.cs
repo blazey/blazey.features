@@ -13,23 +13,16 @@ namespace blazey.features.configuration
             where TFeatureSpecifactionImplementation : IFeatureSpecification<TFeature>
             where TFeature : class
         {
-            var implementation = typeof (TFeatureSpecifactionImplementation);
 
-            if (implementation.IsAbstract || implementation.IsInterface)
-            {
-                throw new InvalidOperationException("must be a concrete type");
-            }
+            FeatureSpecificationType.ThrowIfNotConcrete<TFeatureSpecifactionImplementation>();
 
             var featureType = typeof (TFeature);
+            var featureSpecifiationContract = FeatureSpecificationType.FromFeature(featureType);
+            var implementation = typeof(TFeatureSpecifactionImplementation);
 
-            if (FeatureSpecificationType.IsFeatureSpecification(featureType))
-            {
-                throw new InvalidOperationException("Cannot nest feature specications");
-            }
+            FeatureSpecificationType.ThrowIfNotFeatureSpecification(implementation);
 
-            var service = FeatureSpecificationType.FromFeature(featureType).FeatureSpecifactionType;
-            
-            _services.Add(new KeyValuePair<Type, Type>(service, implementation));
+            _services.Add(new KeyValuePair<Type, Type>(featureSpecifiationContract, implementation));
         }
 
         public void ConfigureWindsor(IWindsorContainer container)

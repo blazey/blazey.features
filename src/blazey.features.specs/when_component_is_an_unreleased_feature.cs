@@ -6,13 +6,14 @@ using blazey.features.specs.configuration;
 
 namespace blazey.features.specs
 {
+    [Subject(typeof(FeaturesFacility))]
     internal class when_component_is_an_unreleased_feature
     {
         private static object _resolvedFeature;
         private static Exception _exception;
         private static readonly Features _features = new Features();
 
-        private Establish that_windsor_is_configured = _features.ConfigureWindsor(config =>
+        private Establish that_windsor_is_configured = _features.EstablishWindsor(config =>
             {
                 config.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>();
                 config.RegisterComponent(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>());

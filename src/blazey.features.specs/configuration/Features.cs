@@ -11,7 +11,7 @@ namespace blazey.features.specs.configuration
 
         private IWindsorContainer _container;
 
-        internal Establish ConfigureWindsor(Action<FeaturesUnitTestConfiguration> register)
+        internal Establish EstablishWindsor(Action<FeaturesUnitTestConfiguration> register)
         {
 
             var unitTestConfiguration = new FeaturesUnitTestConfiguration();
