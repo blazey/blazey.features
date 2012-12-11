@@ -20,8 +20,6 @@ namespace blazey.features.configuration
             var featureSpecifiationContract = FeatureSpecificationType.FromFeature(featureType);
             var implementation = typeof(TFeatureSpecifactionImplementation);
 
-            FeatureSpecificationType.ThrowIfNotFeatureSpecification(implementation);
-
             _services.Add(new KeyValuePair<Type, Type>(featureSpecifiationContract, implementation));
         }
 

@@ -26,14 +26,8 @@ namespace blazey.features
         public object Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver,
                               ComponentModel model, DependencyModel dependency)
         {
-            /*
-             * TODO: If type has corrsponding IFeatureSpecification invoke Default on corresponding type, 
-             * if true return Default instance. Otherwise invoke Feature member and resolve instance 
-             * according to behaviour of IFeatureSpecification implementation.
-             */
-
-            var featurespecificationType = FeatureSpecificationType
-                .FromFeature(dependency.TargetItemType);
+ 
+            var featurespecificationType = FeatureSpecificationType.FromFeature(dependency.TargetItemType);
 
             var featureSpecification = (IFeatureSpecification<object>) _kernel.Resolve(featurespecificationType);
 

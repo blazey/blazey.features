@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Castle.Core;
 using Castle.MicroKernel;
 
@@ -28,22 +29,22 @@ namespace blazey.features
 
         }
 
-        private static bool IsFeatureSpecification(Type type)
+        static bool IsFeatureSpecification(Type toCheck)
         {
-            var x = _openGenericType.IsSubclassOf(type);
-            var y = type.IsSubclassOf(_openGenericType);
+            while (toCheck != null && toCheck != typeof(object))
+            {
+                var cur = toCheck.GetInterfaces()
+                                 .Any(x =>
+                                      x.IsGenericType &&
+                                      x.GetGenericTypeDefinition() == _openGenericType.GetGenericTypeDefinition());
 
-            return type == _openGenericType;
-
-        }
-
-        internal static void ThrowIfNotFeatureSpecification(Type candidate)
-        {
-            if (IsFeatureSpecification(candidate)) return;
-            const string messageFormat = "Type '{0}' must implement '{1}'";
-            var message = string.Format(messageFormat, candidate.FullName, FeatureSpecifcationFullName());
-
-            throw new InvalidOperationException(message);
+                if(cur)
+                {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
         }
 
         internal static Type FromFeature(Type type)

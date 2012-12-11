@@ -1,4 +1,5 @@
 using System;
+using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Machine.Specifications;
 using blazey.features.specs.Doubles;
@@ -25,5 +26,4 @@ namespace blazey.features.specs
         public It should_not_throw = () => _exception.ShouldBeNull();
         public It should_resolve_as_unreleased = () => _resolvedFeature.ShouldBeOfType<UnreleasedFeature>();
     }
-
 }

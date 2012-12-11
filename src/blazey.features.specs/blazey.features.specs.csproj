@@ -66,6 +66,7 @@
     <Compile Include="when_component_is_an_unreleased_feature.cs" />
     <Compile Include="when_component_is_a_released_feature.cs" />
     <Compile Include="when_component_has_corresponding_feature_specification.cs" />
+    <Compile Include="when_facility_tries_to_resolve_non_specifcation_facility.cs" />
     <Compile Include="when_feature_specifcation_is_registered_with_contract_not_concrete_type.cs" />
     <Compile Include="when_machine_specs_compiles.cs" />
   </ItemGroup>
