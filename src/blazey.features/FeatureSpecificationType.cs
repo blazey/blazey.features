@@ -7,9 +7,9 @@ namespace blazey.features
 {
     internal class FeatureSpecificationType
     {
+        
         private static readonly Type _openGenericType = typeof(IFeatureSpecification<>);
-
-
+        
         internal static void ThrowIfNotConcrete<T>()
         {
             var implementation = typeof (T);
@@ -21,6 +21,7 @@ namespace blazey.features
 
         internal static bool KernelCanResolve(IKernel kernel, DependencyModel dependency)
         {
+
             if (IsFeatureSpecification(dependency.TargetItemType)) return false;
 
             var featureSpecificationType = FromFeature(dependency.TargetItemType);
@@ -51,19 +52,12 @@ namespace blazey.features
         {
             if (type == _openGenericType)
             {
-                var featureSpecifcationFullName = FeatureSpecifcationFullName();
-                var message = string.Format("type is not '{0}'", featureSpecifcationFullName);
+                var message = string.Format("type is not '{0}'", _openGenericType.FullName);
                 throw new ArgumentException(message);
             }
             
             return _openGenericType.MakeGenericType(type);
 
-        }
-
-        private static string FeatureSpecifcationFullName()
-        {
-            var featureSpecifcationFullName = _openGenericType.FullName;
-            return featureSpecifcationFullName;
         }
     }
 }

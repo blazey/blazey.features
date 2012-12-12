@@ -1,4 +1,3 @@
-using System;
 using Castle.Core;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Context;
@@ -12,14 +11,11 @@ namespace blazey.features
         public FeatureResolver(IKernel kernel)
         {
             _kernel = kernel;
-            //TODO: if IFeatureSpecification exists and isn't configured? Throw, offer as own behavior so testable.
-
         }
 
         public bool CanResolve(CreationContext context, ISubDependencyResolver contextHandlerResolver,
                                ComponentModel model, DependencyModel dependency)
         {
-
             return FeatureSpecificationType.KernelCanResolve(_kernel, dependency);
         }
 
@@ -34,27 +30,6 @@ namespace blazey.features
             return featureSpecification.On()
                        ? _kernel.Resolve(dependency.TargetItemType)
                        : featureSpecification.Feature();
-        }
-    }
-
-    internal class ItemType
-    {
-        internal static Type GetItemType(Type itemType)
-        {
-            if (itemType == null)
-            {
-                return null;
-            }
-            if (itemType.IsArray)
-            {
-                return itemType.GetElementType();
-            }
-            if (itemType.IsGenericType == false || itemType.IsGenericTypeDefinition)
-            {
-                return null;
-            }
-
-            return itemType.GetGenericArguments()[0];
         }
     }
 }

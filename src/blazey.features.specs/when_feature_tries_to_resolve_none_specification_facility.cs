@@ -8,7 +8,7 @@ using blazey.features.specs.Doubles;
 namespace blazey.features.specs
 {
     [Subject(typeof(FeatureResolver))]
-    public class when_facility_tries_to_resolve_non_specifcation_facility
+    public class when_feature_tries_to_resolve_none_specification_facility
     {
         private Establish that = () =>
             {
