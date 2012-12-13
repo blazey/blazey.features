@@ -13,19 +13,19 @@ namespace blazey.features
             kernel.Resolver.AddSubResolver(new FeatureResolver(kernel));
         }
 
-        public void Terminate()
-        {
-        }
-
-        public static void AddFeatueSpecification<TFeatureSpecifaction, TFeature>(IWindsorContainer container, Action<FeaturesConfiguration> config) 
-            where TFeatureSpecifaction : IFeatureSpecification<TFeature> where TFeature : class
+        public static void ConfigureFeatureSpecifications(IWindsorContainer container, Action<FeaturesConfiguration> register) 
         {
 
             if (null == container) throw new ArgumentNullException("container");
 
-            var configInstance = new FeaturesConfiguration();
-            configInstance.AddFeatueSpecification<TFeatureSpecifaction, TFeature>();
-            configInstance.ConfigureWindsor(container);
+            var configuration = new FeaturesConfiguration();
+            register(configuration);
+            configuration.ConfigureWindsor(container);
         }
+
+        public void Terminate()
+        {
+        }
+
     }
 }
