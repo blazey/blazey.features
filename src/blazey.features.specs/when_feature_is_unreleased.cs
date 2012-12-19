@@ -2,12 +2,10 @@ using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Machine.Specifications;
-using blazey.features.configuration;
 using blazey.features.specs.Doubles;
 
 namespace blazey.features.specs
 {
-
     [Subject(typeof(FeaturesFacility))]
     internal class when_feature_is_unreleased
     {
@@ -15,11 +13,9 @@ namespace blazey.features.specs
         private Establish that_windsor_is_configured = () =>
             {
                 _windsorContainer = new WindsorContainer();
-                _windsorContainer.AddFacility<FeaturesFacility>();
-                
-                FeaturesFacility.ConfigureFeatureSpecifications(
+                _windsorContainer.AddFacility(FeaturesFacility.RegisterFeatureSpecifications(
                     _windsorContainer, register =>
-                                       register.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>());
+                                       register.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>()));
 
                 _windsorContainer.Register(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
                                            Component.For<Service>());
@@ -37,4 +33,3 @@ namespace blazey.features.specs
 
     }
 }
-

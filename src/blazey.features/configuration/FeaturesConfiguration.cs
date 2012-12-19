@@ -26,11 +26,7 @@ namespace blazey.features.configuration
 
         public void ConfigureWindsor(IWindsorContainer container)
         {
-            if (container.Kernel.GetFacilities().All(f => f.GetType() != typeof (FeaturesFacility)))
-            {
-                container.AddFacility<FeaturesFacility>(); 
-            }
-
+            
             foreach (var service in _services)
             {
                 container.Register(Component.For(service.Key).ImplementedBy(service.Value));
