@@ -57,11 +57,13 @@
   <ItemGroup>
     <Compile Include="doubles\DummyFeatureSpecification.cs" />
     <Compile Include="doubles\ISomeFeature.cs" />
+    <Compile Include="FeatureTableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="doubles\ReleasedFeature.cs" />
     <Compile Include="doubles\Service.cs" />
     <Compile Include="doubles\UnreleasedFeature.cs" />
-    <Compile Include="when_feature_implementation_is_condition.cs" />
+    <Compile Include="when_feature_implementation_is_off.cs" />
+    <Compile Include="when_feature_implementation_is_on.cs" />
     <Compile Include="when_component_is_a_released_feature.cs" />
     <Compile Include="when_feature_is_unreleased.cs" />
     <Compile Include="when_feature_tries_to_resolve_none_specification_facility.cs" />

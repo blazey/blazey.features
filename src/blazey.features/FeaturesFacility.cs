@@ -13,7 +13,7 @@ namespace blazey.features
         public void Init(IKernel kernel, IConfiguration facilityConfig)
         {
             kernel.Resolver.AddSubResolver(new FeatureResolver(kernel));
-            kernel.Register(Component.For<FeatureTable>().Instance(() => new FeatureTableImpl(kernel)));
+            kernel.Register(Component.For<FeatureTable>().Instance(() => new Features(kernel)));
         }
 
         public static FeaturesFacility RegisterFeatureSpecifications(IWindsorContainer container, Action<FeaturesConfiguration> register) 
@@ -38,5 +38,5 @@ namespace blazey.features
 
     }
 
-    public delegate FeatureTableImpl FeatureTable();
+    public delegate Features FeatureTable();
 }
