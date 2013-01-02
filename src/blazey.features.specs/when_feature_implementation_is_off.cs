@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Machine.Specifications;
 using blazey.features.specs.Doubles;
+using blazey.features.specs.doubles;
 
 namespace blazey.features.specs
 {

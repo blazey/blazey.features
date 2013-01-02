@@ -13,7 +13,7 @@ namespace blazey.features
         internal static void ThrowIfNotConcrete<T>()
         {
             var implementation = typeof (T);
-            if (!implementation.IsAbstract && !implementation.IsInterface) return;
+            if (!implementation.IsAbstract && !implementation.IsInterface) return; //todo: delegate
             const string messageFormat = "Implementation type: '{0}' must be a concrete type.";
             var message = string.Format(messageFormat, implementation.FullName);
             throw new InvalidOperationException(message);

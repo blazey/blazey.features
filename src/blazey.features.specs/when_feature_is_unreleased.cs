@@ -18,11 +18,11 @@ namespace blazey.features.specs
                                        register.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>()));
 
                 _windsorContainer.Register(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
-                                           Component.For<Service>());
+                                           Component.For<ServiceWithAFeature>());
             };
 
         private Because windsor_resolves = () => _exception = Catch.Exception(
-            () => _resolvedFeature = _windsorContainer.Resolve<Service>().Feature);
+            () => _resolvedFeature = _windsorContainer.Resolve<ServiceWithAFeature>().Feature);
 
         private It should_not_throw = () => _exception.ShouldBeNull();
         private It should_resolve_as_unreleased = () => _resolvedFeature.ShouldBeOfType<UnreleasedFeature>();

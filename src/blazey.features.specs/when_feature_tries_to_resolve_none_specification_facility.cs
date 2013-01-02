@@ -16,7 +16,7 @@ namespace blazey.features.specs
                 _dependencyModel = new DependencyModel(target.FullName, target, false);
                 var container = new WindsorContainer();
                 container.Register(
-                    Component.For<Service>(),
+                    Component.For<ServiceWithAFeature>(),
                     Component.For<IFeatureSpecification<ISomeFeature>>().ImplementedBy<DummyFeatureSpecification>());
 
                 _resolver = new FeatureResolver(container.Kernel);

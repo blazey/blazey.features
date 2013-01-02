@@ -5,7 +5,7 @@ namespace blazey.features
         bool On();
     }
 
-    public interface IFeatureSpecification<out TFeature> :IFeatureOn where TFeature : class
+    public interface IFeatureSpecification<out TFeature> : IFeatureOn where TFeature : class
     {
         TFeature Feature();
     }
