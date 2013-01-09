@@ -16,6 +16,6 @@ namespace blazey.features.specs
         private Because windsor_resolves = () => _exception = Catch.Exception(
             () => _featuresConfiguration.AddFeatueSpecification<IFeatureSpecification<ISomeFeature>, ISomeFeature>());
 
-        private It should_throw_invlaid_operation = () => _exception.ShouldBeOfType<InvalidOperationException>();
+        private It should_throw_invalid_operation = () => _exception.ShouldBeOfType<InvalidOperationException>();
     }
 }

@@ -30,22 +30,36 @@ namespace blazey.features
 
         }
 
-        static bool IsFeatureSpecification(Type toCheck)
+        internal static bool IsFeatureSpecification(Type toCheck)
         {
-            while (toCheck != null && toCheck != typeof(object))
-            {
-                var cur = toCheck.GetInterfaces()
-                                 .Any(x =>
-                                      x.IsGenericType &&
-                                      x.GetGenericTypeDefinition() == _openGenericType.GetGenericTypeDefinition());
+            return null != FirstFeatureSpecificationOrDefault(toCheck);
+        }
 
-                if(cur)
+        private static Type FirstFeatureSpecificationOrDefault(Type featureSpecification)
+        {
+            while (featureSpecification != null && featureSpecification != typeof(object))
+            {
+                var cur = featureSpecification
+                    .GetInterfaces()
+                    .Where(type =>
+                           type.IsGenericType &&
+                           type.GetGenericTypeDefinition() == _openGenericType.GetGenericTypeDefinition())
+                    .ToArray();
+
+                if (cur.Any())
                 {
-                    return true;
+                    return cur.FirstOrDefault();
                 }
-                toCheck = toCheck.BaseType;
+                featureSpecification = featureSpecification.BaseType;
             }
-            return false;
+            return null;
+
+        }
+
+        internal static Type ToFeature(Type featureSpecification)
+        {
+            var feature = FirstFeatureSpecificationOrDefault(featureSpecification);
+            return null == feature ? null : feature.GetGenericArguments()[0];
         }
 
         internal static Type FromFeature(Type type)

@@ -56,8 +56,10 @@
     <Compile Include="FeatureResolver.cs" />
     <Compile Include="FeatureSpecificationType.cs" />
     <Compile Include="FeaturesTable.cs" />
+    <Compile Include="IFeatureOn.cs" />
     <Compile Include="IFeatureSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnRegisteredFeatureIsSpecifiedException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

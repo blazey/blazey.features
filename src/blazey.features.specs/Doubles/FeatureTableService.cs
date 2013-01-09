@@ -14,5 +14,9 @@ namespace blazey.features.specs.doubles
             return _featureTableTable.IsOn<TService, TFeature>();
         }
 
+        public void ValidateSpecificiedFeaturesAreRegistered()
+        {
+            _featureTableTable.ValidateSpecificiedFeaturesAreRegistered();
+        }
     }
 }

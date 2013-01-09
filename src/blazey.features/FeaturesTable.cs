@@ -1,3 +1,5 @@
+using System.Linq;
+using Castle.Core;
 using Castle.MicroKernel;
 
 namespace blazey.features
@@ -19,6 +21,11 @@ namespace blazey.features
             
             return null != featureSpecification 
                 && featureSpecification.Feature().GetType() == typeof (TFeature);
+        }
+
+        public void ValidateSpecificiedFeaturesAreRegistered()
+        {
+            UnRegisteredFeatureIsSpecifiedException.ThrowIfUnregistered(_kernel);
         }
     }
 }

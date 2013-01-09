@@ -55,13 +55,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="doubles\FeatureX.cs" />
     <Compile Include="doubles\DummyFeatureSpecification.cs" />
+    <Compile Include="doubles\FeatureSpecificationX.cs" />
+    <Compile Include="doubles\FeatureSpecificationY.cs" />
+    <Compile Include="doubles\FeatureSpecificationZ.cs" />
+    <Compile Include="doubles\FeatureY.cs" />
+    <Compile Include="doubles\FeatureZ.cs" />
     <Compile Include="doubles\ISomeFeature.cs" />
     <Compile Include="doubles\FeatureTableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="doubles\ReleasedFeature.cs" />
     <Compile Include="doubles\ServiceWithAFeature.cs" />
     <Compile Include="doubles\UnreleasedFeature.cs" />
+    <Compile Include="when_features_are_reconciled_against_specifications.cs" />
     <Compile Include="when_feature_implementation_is_off.cs" />
     <Compile Include="when_feature_implementation_is_on.cs" />
     <Compile Include="when_component_is_a_released_feature.cs" />
