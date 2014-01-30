@@ -1,17 +1,16 @@
 using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Machine.Specifications;
-using blazey.features.specs.Doubles;
+using blazey.features.specs.doubles;
+using NUnit.Framework;
 
 namespace blazey.features.specs
 {
-    [Subject(typeof(FeaturesFacility))]
-    internal class when_feature_is_unreleased
+	internal class when_feature_is_unreleased : context_specification
     {
 
-        private Establish that_windsor_is_configured = () =>
-            {
+		public override void Given ()
+		{
                 _windsorContainer = new WindsorContainer();
                 _windsorContainer.AddFacility(FeaturesFacility.RegisterFeatureSpecifications(
                     _windsorContainer, register =>
@@ -19,17 +18,25 @@ namespace blazey.features.specs
 
                 _windsorContainer.Register(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
                                            Component.For<ServiceWithAFeature>());
-            };
+            }
 
-        private Because windsor_resolves = () => _exception = Catch.Exception(
-            () => _resolvedFeature = _windsorContainer.Resolve<ServiceWithAFeature>().Feature);
+		public override void When ()
+		{
+			_resolvedFeature = _windsorContainer.Resolve<ServiceWithAFeature> ().Feature;
+		}
 
-        private It should_not_throw = () => _exception.ShouldBeNull();
-        private It should_resolve_as_unreleased = () => _resolvedFeature.ShouldBeOfType<UnreleasedFeature>();
+		[Then]
+		public void should_not_throw(){
+			Assert.That(base.Exception, Is.Null);
+		}
 
-        private static object _resolvedFeature;
-        private static Exception _exception;
-        private static WindsorContainer _windsorContainer;
+		[Then]
+		public void should_resolve_as_unreleased(){
+			Assert.That (_resolvedFeature, Is.TypeOf<UnreleasedFeature> ());
+		}
+
+        private object _resolvedFeature;
+        private WindsorContainer _windsorContainer;
 
     }
 }

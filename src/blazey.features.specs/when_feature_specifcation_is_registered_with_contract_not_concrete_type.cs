@@ -1,21 +1,27 @@
 using System;
-using Machine.Specifications;
+using NUnit.Framework;
 using blazey.features.configuration;
-using blazey.features.specs.Doubles;
+using blazey.features.specs.doubles;
 
 namespace blazey.features.specs
 {
-    [Subject(typeof(FeaturesConfiguration))]
-    internal class when_feature_specifcation_is_registered_with_contract_not_concrete_type
-    {
-        private static Exception _exception;
-        private static  FeaturesConfiguration _featuresConfiguration = new FeaturesConfiguration();
+	public class when_feature_specifcation_is_registered_with_contract_not_concrete_type : context_specification
+	{
+		FeaturesConfiguration _featuresConfiguration;
 
-        private Establish that_windsor_is_configured = () => _featuresConfiguration = new FeaturesConfiguration();
+		public override void Given ()
+		{
+			_featuresConfiguration = new FeaturesConfiguration();
+		}
 
-        private Because windsor_resolves = () => _exception = Catch.Exception(
-            () => _featuresConfiguration.AddFeatueSpecification<IFeatureSpecification<ISomeFeature>, ISomeFeature>());
+		public override void When ()
+		{
+			_featuresConfiguration.AddFeatueSpecification<IFeatureSpecification<ISomeFeature>, ISomeFeature> ();
+		}
 
-        private It should_throw_invalid_operation = () => _exception.ShouldBeOfType<InvalidOperationException>();
-    }
+		[Then]
+		public void should_throw_invalid_operation() {
+			Assert.That (Exception, Is.TypeOf<InvalidOperationException> ());
+		}
+	}
 }

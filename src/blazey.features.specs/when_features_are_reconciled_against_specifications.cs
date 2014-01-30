@@ -1,61 +1,72 @@
 ﻿using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Machine.Specifications;
+using NUnit.Framework;
 using blazey.features.specs.doubles;
 
 namespace blazey.features.specs
 {
-    [Subject(typeof (FeaturesTable))]
-    internal class when_features_are_reconciled_against_specifications
-    {
-        private Establish context = () =>
-            {
-                var container = new WindsorContainer();
+	internal class when_features_are_reconciled_against_specifications : context_specification
+	{
+		private FeatureTableService _featureTableService;
 
-                container.AddFacility(
-                    FeaturesFacility.RegisterFeatureSpecifications(
-                        container, register =>
-                            {
-                                register.AddFeatueSpecification<FeatureSpecificationX, FeatureX>();
-                                register.AddFeatueSpecification<FeatureSpecificationY, FeatureY>();
-                                register.AddFeatueSpecification<FeatureSpecificationZ, FeatureZ>();
-                            }));
+		public override void Given ()
+		{
+			var container = new WindsorContainer ();
 
-                container.Register(Component.For<FeatureZ>().ImplementedBy<FeatureZ>(),
-                                   Component.For<FeatureTableService>());
+			container.AddFacility (
+				FeaturesFacility.RegisterFeatureSpecifications (
+					container, register => {
+					register.AddFeatueSpecification<FeatureSpecificationX, FeatureX> ();
+					register.AddFeatueSpecification<FeatureSpecificationY, FeatureY> ();
+					register.AddFeatueSpecification<FeatureSpecificationZ, FeatureZ> ();
+				}));
 
-                _featureTableService = container.Resolve<FeatureTableService>();
-            };
+			container.Register (Component.For<FeatureZ> ().ImplementedBy<FeatureZ> (),
+				Component.For<FeatureTableService> ());
 
-        private Because specifications_missing_registered_features =
-            () => _exception = Catch.Exception(() => _featureTableService.ValidateSpecificiedFeaturesAreRegistered());
+			_featureTableService = container.Resolve<FeatureTableService> ();
+		}
 
-        private It should_throw_un_registered_feature_is_specificied_exception
-            = () => _exception.ShouldBeOfType<UnRegisteredFeatureIsSpecifiedException>();
+		public override void When ()
+		{
+			_featureTableService.ValidateSpecificiedFeaturesAreRegistered ();
+		}
 
-        private It should_list_unregistered_features_containing_specification_x_and_feature_x
-            = () => ResolvesInvalidSpecification<FeatureSpecificationX, FeatureX>(_exception);
+		[Then]
+		public void should_throw_un_registered_feature_is_specificied_exception ()
+		{
+			Assert.That (base.Exception, Is.TypeOf<UnRegisteredFeatureIsSpecifiedException> ());
+		}
 
-        private It should_list_unregistered_features_containing_specification_y_and_feature_ =
-            () => ResolvesInvalidSpecification<FeatureSpecificationY, FeatureY>(_exception);
+		[Then]
+		public void should_list_unregistered_features_containing_specification_x_and_feature_x ()
+		{
+			ResolvesInvalidSpecification<FeatureSpecificationX, FeatureX> (base.Exception);
+		}
 
-        private It should_not_list_unregistered_features_containing_specification_z_and_feature_z
-            = () => ((UnRegisteredFeatureIsSpecifiedException) _exception)
-                        .InvalidSpecifications.ContainsKey(typeof (FeatureSpecificationZ)).ShouldBeFalse();
+		[Then]
+		public void should_list_unregistered_features_containing_specification_y_and_feature_ ()
+		{
+			ResolvesInvalidSpecification<FeatureSpecificationY, FeatureY> (base.Exception);
+		}
 
-        private static It ResolvesInvalidSpecification<TFeatureSpecification, TFeature>(Exception exception)
-        {
-            var unRegisteredFeatureIsSpecifiedException = (UnRegisteredFeatureIsSpecifiedException) exception;
+		[Then]
+		public void should_not_list_unregistered_features_containing_specification_z_and_feature_z ()
+		{
+			Assert.That (((UnRegisteredFeatureIsSpecifiedException)base.Exception)
+				.InvalidSpecifications.ContainsKey (typeof(FeatureSpecificationZ)), Is.False);
+		}
 
-            unRegisteredFeatureIsSpecifiedException
-                .InvalidSpecifications[typeof (TFeatureSpecification)]
-                .ShouldEqual(typeof (TFeature));
+		private static void ResolvesInvalidSpecification<TFeatureSpecification, TFeature> (Exception exception)
+		{
+			var unRegisteredFeatureIsSpecifiedException = (UnRegisteredFeatureIsSpecifiedException)exception;
 
-            return () => { };
-        }
+			var type = unRegisteredFeatureIsSpecifiedException
+						.InvalidSpecifications [typeof(TFeatureSpecification)];
 
-        private static Exception _exception;
-        private static FeatureTableService _featureTableService;
-    }
+			Assert.That (type, Is.EqualTo (typeof(TFeature))); 
+
+		}
+	}
 }

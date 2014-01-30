@@ -1,37 +1,42 @@
 using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Machine.Specifications;
-using blazey.features.specs.Doubles;
 using blazey.features.specs.doubles;
+using NUnit.Framework;
 
 namespace blazey.features.specs
 {
-    [Subject(typeof(FeaturesFacility))]
-    internal class when_feature_implementation_is_on
+	public class when_feature_implementation_is_on : context_specification
     {
+		private bool _isOn;
+		private WindsorContainer _windsorContainer;
 
-        private Establish that_windsor_is_configured = () =>
-        {
-            _windsorContainer = new WindsorContainer();
+		public override void Given ()
+		{
+			_windsorContainer = new WindsorContainer();
 
-            _windsorContainer.AddFacility(FeaturesFacility.RegisterFeatureSpecifications(_windsorContainer, register =>
-                                   register.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>()));
-    
-            _windsorContainer.Register(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
-                                       Component.For<FeatureTableService>());
-        };
+			_windsorContainer.AddFacility(FeaturesFacility.RegisterFeatureSpecifications(_windsorContainer, register =>
+				register.AddFeatueSpecification<DummyFeatureSpecification, ISomeFeature>()));
 
-        private Because windsor_resolves = () => _exception = Catch.Exception(
-            () => _isOn = _windsorContainer.Resolve<FeatureTableService>().IsOn<ISomeFeature, UnreleasedFeature>());
+			_windsorContainer.Register(Component.For<ISomeFeature>().ImplementedBy<ReleasedFeature>(),
+				Component.For<FeatureTableService>());
+		}
 
-        private It should_not_throw = () => _exception.ShouldBeNull();
-        private It should_be_on = () => _isOn.ShouldBeTrue();
+		public override void When ()
+		{
+			_isOn = _windsorContainer.Resolve<FeatureTableService>().IsOn<ISomeFeature, UnreleasedFeature>();
+		}
 
-        private static bool _isOn;
-        private static Exception _exception;
-        private static WindsorContainer _windsorContainer;
-        
+		[Then]
+		public void should_not_throw(){
+			Assert.That(base.Exception, Is.Null);
+		}
+
+		[Then]
+		public void should_resolve_as_released ()
+		{
+			Assert.That(_isOn, Is.True);
+		}        
     }
 }
 

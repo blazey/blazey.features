@@ -1,4 +1,4 @@
-namespace blazey.features.specs.Doubles
+namespace blazey.features.specs.doubles
 {
     public interface ISomeFeature
     {
