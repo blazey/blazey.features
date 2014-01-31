@@ -78,9 +78,6 @@
     <Compile Include="Catch.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\blazey.features\blazey.features.csproj">
       <Project>{86C5C6B2-9BC6-4F6E-AB06-C702AFD3D38D}</Project>
       <Name>blazey.features</Name>

@@ -22,8 +22,8 @@ install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console  
 
  script:
-  - ./.nuget/NuGet.exe install -self
-  - ./.nuget/NuGet.exe install ./packages.config -OutputDirectory ./packages
+  - mono --runtime=v4.0.30319 .nuget/NuGet.exe update -self
+  - mono --runtime=v4.0.30319 .nuget/NuGet.exe install packages.config -OutputDirectory ./packages
   - xbuild blazey.features.xbuild
   - nunit-console ./src/blazey.features.specs/bin/Release/blazey.features.specs.dll
 
