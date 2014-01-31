@@ -3,22 +3,12 @@ language: c
 env:
   - EnableNuGetPackageRestore=true
 
-before_install:
-  # Make sure mono is installed,
-  # pipe stdout to dev/null because qq is still too chatty
-  # Adding the mono-experimental build, because Ubuntu 12.04 uses mono 2.10,
-  # which doesn't include Microsoft.Build.dll, which is needed
-  # for NuGet.exe to function properly.
-  #
-  # Shame on us for appending to sources.list, but it's simple, fast and used
-  # only for TravisCI
-  - sudo echo "deb http://debian.meebey.net/experimental/mono /" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update > /dev/null
-  - sudo apt-get install --force-yes -y mono-complete
+install:
+  - sudo add-apt-repository ppa:directhex/monoxide
+  - sudo apt-get update
+  - sudo apt-get dist-upgrade
   # update root certs for nuget
   - mozroots --import --sync
-
-install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console  
 
 script:
