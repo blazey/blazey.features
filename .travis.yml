@@ -8,13 +8,10 @@ env:
 
 before_install:
   - wget "http://download.xamarin.com/MonoFrameworkMDK/Macx86/MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg"
-  - sudo installer -pkg "MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg" -target /
-
-install:
-  # update root certs for nuget
-  - mozroots --import --sync
+  - sudo apt-get installer -pkg "MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg" -target /
 
 script:
+  - mozroots --import --sync
   - mono --runtime=v4.0.30319 .nuget/NuGet.exe update -self
   - mono --runtime=v4.0.30319 .nuget/NuGet.exe install packages.config -OutputDirectory /packages
   - mono --runtime=v4.0.30319 packages/NUnit.Runners.2.6.1/tools/nunit-console.exe -noxml -nodots -labels -stoponerror /src/blazey.features.specs/bin/Release/blazey.features.specs.dll
