@@ -15,10 +15,8 @@ install:
   - mozroots --import --sync
 
 script:
-  - mono --runtime=v4.0.30319 .nuget/NuGet.exe update -self
-  - mono --runtime=v4.0.30319 .nuget/NuGet.exe install packages.config -OutputDirectory /packages
-  - mono --runtime=v4.0.30319 packages/NUnit.Runners.2.6.1/tools/nunit-console.exe -noxml -nodots -labels -stoponerror /src/blazey.features.specs/bin/Release/blazey.features.specs.dll
   - xbuild blazey.features.xbuild
+  - nunit.sh src/blazey.features.specs/bin/Release/blazey.features.specs.dll
 
 notifications:
   email:
