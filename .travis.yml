@@ -1,0 +1,12 @@
+language: c
+ 
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+ 
+script:
+  - xbuild blazey.features.xbuild
+  - nunit-console ./src/blazey.features.specs/bin/Release/blazey.features.specs.dll
+
+notifications:
+  email:
+    - ed@ejb.name
