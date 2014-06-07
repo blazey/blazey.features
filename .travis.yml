@@ -4,7 +4,8 @@ language: c
 install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
 script:
-  - mono nuget.exe update -self
-  - mono nuget.exe restore blazey.features.sln
+  - mozroots --import --sync
+  - mono --runtime=v4 nuget.exe update -self
+  - mono --runtime=v4 nuget.exe restore blazey.features.sln
   - xbuild blazey.features.sln
   - nunit-console features.specs/bin/Debug/features.specs.dll
