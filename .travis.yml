@@ -1,9 +1,4 @@
 ## Travis CI Integration
-
-language: c
-
-install:## Travis CI Integration
-
 language: c
 
 install:
