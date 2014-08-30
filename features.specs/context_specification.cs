@@ -10,7 +10,7 @@ namespace blazey.features.specs
 		public void Setup()
 		{
 			Given();
-			Exception = Catch.Exception(()=> When());
+            When();
 		}
 
 		public abstract void Given();

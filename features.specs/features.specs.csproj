@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,31 +43,10 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="context_specification.cs" />
-    <Compile Include="ThenAttribute.cs" />
-    <Compile Include="when_component_is_a_released_feature.cs" />
-    <Compile Include="when_feature_implementation_is_off.cs" />
-    <Compile Include="when_feature_implementation_is_on.cs" />
-    <Compile Include="when_feature_is_unreleased.cs" />
-    <Compile Include="when_feature_specifcation_is_registered_with_contract_not_concrete_type.cs" />
-    <Compile Include="when_feature_tries_to_resolve_none_specification_facility.cs" />
-    <Compile Include="when_features_are_reconciled_against_specifications.cs" />
     <Compile Include="Catch.cs" />
-    <Compile Include="Doubles\DummyFeatureSpecification.cs" />
-    <Compile Include="Doubles\FeatureSpecificationX.cs" />
-    <Compile Include="Doubles\FeatureSpecificationY.cs" />
-    <Compile Include="Doubles\FeatureSpecificationZ.cs" />
-    <Compile Include="Doubles\FeatureTableService.cs" />
-    <Compile Include="Doubles\FeatureX.cs" />
-    <Compile Include="Doubles\FeatureY.cs" />
-    <Compile Include="Doubles\FeatureZ.cs" />
-    <Compile Include="Doubles\ISomeFeature.cs" />
-    <Compile Include="Doubles\ReleasedFeature.cs" />
-    <Compile Include="Doubles\ServiceWithAFeature.cs" />
-    <Compile Include="Doubles\UnreleasedFeature.cs" />
+    <Compile Include="when_feature_is_toggled.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Doubles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

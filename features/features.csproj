@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,20 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FeatureResolver.cs" />
-    <Compile Include="Features.cs" />
-    <Compile Include="FeaturesFacility.cs" />
-    <Compile Include="FeatureSpecificationType.cs" />
-    <Compile Include="FeaturesTable.cs" />
-    <Compile Include="IFeatureOn.cs" />
-    <Compile Include="IFeatureSpecification.cs" />
-    <Compile Include="UnRegisteredFeatureIsSpecifiedException.cs" />
-    <Compile Include="configuration\FeaturesConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
