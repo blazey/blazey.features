@@ -1,8 +1,8 @@
 using System;
 
-namespace features
+namespace blazey.features
 {
-    public interface IFeatureSpec
+    public interface IFeatureMap
     {
         Type FeatureType { get; }
         Type ImplementationType();

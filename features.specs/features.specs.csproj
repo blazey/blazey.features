@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6625E1C5-1499-47DD-8992-1B02AE324A0B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>features.specs</RootNamespace>
-    <AssemblyName>features.specs</AssemblyName>
+    <RootNamespace>blazey.features.specs</RootNamespace>
+    <AssemblyName>blazey.features.specs</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="context_specification.cs" />
     <Compile Include="Catch.cs" />
+    <Compile Include="when_feature_is_config_has_dependency.cs" />
     <Compile Include="when_feature_is_toggled.cs" />
   </ItemGroup>
   <ItemGroup />

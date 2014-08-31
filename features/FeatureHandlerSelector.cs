@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using Castle.MicroKernel;
 
-namespace features
+namespace blazey.features
 {
     internal class FeatureHandlerSelector : IHandlerSelector
     {
@@ -15,9 +15,9 @@ namespace features
             _kernel = kernel;
         }
 
-        public void AddFeatureSpecConfig(FeatureSpecConfig featureSpecConfig)
+        public void AddFeatureSpecConfig(FeatureConfiguration featureConfiguration)
         {
-            foreach (var featureSpecType in featureSpecConfig.FeatureSpecs)
+            foreach (var featureSpecType in featureConfiguration.ConfigMap)
             {
                 _featureSpecs.AddOrUpdate(featureSpecType.Key, featureSpecType.Value,
                     (k, v) => featureSpecType.Value);
@@ -36,7 +36,7 @@ namespace features
 
             if (null == spec) return null;
          
-            var featureSpec = _kernel.Resolve(spec) as IFeatureSpec;
+            var featureSpec = _kernel.Resolve(spec) as IFeatureMap;
 
             if(null == featureSpec) return null;
 

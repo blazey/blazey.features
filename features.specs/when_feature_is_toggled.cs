@@ -1,11 +1,9 @@
 ﻿using System;
-using blazey.features.specs;
-using Castle.Components.DictionaryAdapter.Xml;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using NUnit.Framework;
 
-namespace features.specs
+namespace blazey.features.specs
 {
     internal class when_feature_is_toggled : context_specification
     {
@@ -19,13 +17,38 @@ namespace features.specs
                     Component.For<IFeature>().ImplementedBy<FeatureA>(),
                     Component.For<IFeature>().ImplementedBy<FeatureB>());
 
-            Specs.Features(_container, c => c.Add<IFeature, FeatureSpecAtoB>());
-
+            Features.Configure(_container, c => c.UseFeatureMap<IFeature, FeatureMapAtoB>());
         }
 
         public override void When()
         {
             _feature = _container.Resolve<IFeature>();
+        }
+
+
+        internal interface IFeature
+        {
+        }
+
+        private class FeatureA : IFeature
+        {
+        }
+
+        private class FeatureB : IFeature
+        {
+        }
+
+        private class FeatureMapAtoB : IFeatureMap
+        {
+            public Type FeatureType
+            {
+                get { return typeof (IFeature); }
+            }
+
+            public Type ImplementationType()
+            {
+                return typeof (FeatureB);
+            }
         }
 
         [Test]
@@ -50,30 +73,6 @@ namespace features.specs
         public void should_not_throw()
         {
             Assert.That(Exception, Is.Null);
-        }
-
-
-        internal interface IFeature
-        {
-        }
-
-        private class FeatureA : IFeature
-        {
-
-        }
-
-        private class FeatureB : IFeature
-        {
-        }
-
-        private class FeatureSpecAtoB : IFeatureSpec
-        {
-            public Type FeatureType { get { return typeof (IFeature); } }
-
-            public Type ImplementationType()
-            {
-                return typeof (FeatureB);
-            }
         }
     }
 }
