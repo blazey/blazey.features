@@ -11,3 +11,5 @@ In the spirit of shipping early and often sometimes it makes sense to release a 
 How
 ==
 ...WIP
+
+(c) Blazey Software Ltd
