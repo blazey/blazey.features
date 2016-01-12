@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "features", "features\features.csproj", "{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "features.specs", "features.specs\features.specs.csproj", "{6625E1C5-1499-47DD-8992-1B02AE324A0B}"
@@ -11,14 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{341462FA-EA2E-40AF-AB0C-A1EBA6C66C39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6625E1C5-1499-47DD-8992-1B02AE324A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = features\features.csproj
