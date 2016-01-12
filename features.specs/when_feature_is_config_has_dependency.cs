@@ -50,7 +50,7 @@ namespace blazey.features.specs
             Assert.That(Exception, Is.Null);
         }
 
-        
+
         private interface IFeatureMapDependency
         {
         }
@@ -73,7 +73,6 @@ namespace blazey.features.specs
 
         private class FeatureMapAtoB : IFeatureMap
         {
-
             public FeatureMapAtoB(IFeatureMapDependency featureMapDependency)
             {
                 if (null == featureMapDependency)

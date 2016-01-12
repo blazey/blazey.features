@@ -3,26 +3,20 @@ using NUnit.Framework;
 
 namespace blazey.features.specs
 {
-	[TestFixture]
-	public abstract class context_specification
-	{
-		[SetUp]
-		public void Setup()
-		{
-			Given();
+    [TestFixture]
+    public abstract class context_specification
+    {
+        [SetUp]
+        public void Setup()
+        {
+            Given();
             When();
-		}
+        }
 
-		public abstract void Given();
+        public abstract void Given();
 
-		public abstract void When();  
+        public abstract void When();
 
-		protected Exception Exception {
-			get;
-			private set;
-		}      
-	}
-
-
+        protected Exception Exception { get; private set; }
+    }
 }
-

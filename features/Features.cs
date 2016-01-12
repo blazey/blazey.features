@@ -27,19 +27,10 @@ namespace blazey.features
 
             _container.Kernel.AddHandlerSelector(featureHandlerSelector);
 
-            foreach (var featureSpecType in featureConfiguration.ConfigMap)
+            foreach (var featureSpecType in featureConfiguration.ConfigMap
+                /* TODO: .Where(kvp => typeof(IFeatureMap).IsAssignableFrom(kvp.Value))*/)
             {
-                var type = featureSpecType;
                 _container.Kernel.Register(Component.For(featureSpecType.Value).ImplementedBy(featureSpecType.Value));
-                _container.Kernel.Register(Component.For(featureSpecType.Key).UsingFactoryMethod(k =>
-                {
-                    var spec = (IFeatureMap)k.Resolve(type.Value);
-
-                    k.ReleaseComponent(spec);
-
-                    return spec.ImplementationType();
-
-                }));
             }
         }
 

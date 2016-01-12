@@ -6,7 +6,7 @@ namespace blazey.features
 {
     public class FeatureConfiguration
     {
-        public IDictionary<Type,Type> ConfigMap { get; private set; }
+        public IDictionary<Type, Type> ConfigMap { get; }
 
         public FeatureConfiguration()
         {
@@ -20,7 +20,7 @@ namespace blazey.features
 
         public FeatureConfiguration UseFeatureMap<TFeature, TFeatureMap>() where TFeatureMap : IFeatureMap
         {
-            ConfigMap.Add(typeof (TFeature), typeof(TFeatureMap));
+            ConfigMap.Add(typeof (TFeature), typeof (TFeatureMap));
             return new FeatureConfiguration(ConfigMap);
         }
     }

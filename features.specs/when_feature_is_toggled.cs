@@ -25,6 +25,29 @@ namespace blazey.features.specs
             _feature = _container.Resolve<IFeature>();
         }
 
+        [Test]
+        public void should_be_feature_b()
+        {
+            Assert.That(_feature, Is.InstanceOf<FeatureB>());
+        }
+
+        [Test]
+        public void should_not_be_feature_a()
+        {
+            Assert.That(_feature, Is.Not.InstanceOf<FeatureA>());
+        }
+
+        [Test]
+        public void should_not_be_null()
+        {
+            Assert.That(_feature, Is.Not.Null);
+        }
+
+        [Test]
+        public void should_not_throw()
+        {
+            Assert.That(Exception, Is.Null);
+        }
 
         internal interface IFeature
         {
@@ -49,30 +72,6 @@ namespace blazey.features.specs
             {
                 return typeof (FeatureB);
             }
-        }
-
-        [Test]
-        public void should_be_feature_b()
-        {
-            Assert.That(_feature, Is.InstanceOf<FeatureB>());
-        }
-
-        [Test]
-        public void should_not_be_feature_a()
-        {
-            Assert.That(_feature, Is.Not.InstanceOf<FeatureA>());
-        }
-
-        [Test]
-        public void should_not_be_null()
-        {
-            Assert.That(_feature, Is.Not.Null);
-        }
-
-        [Test]
-        public void should_not_throw()
-        {
-            Assert.That(Exception, Is.Null);
         }
     }
 }
